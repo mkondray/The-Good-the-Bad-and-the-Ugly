@@ -11,7 +11,7 @@ var PORTTWO = 7500;
 
 // We need two different functions to handle requests, one for each server.
 function handleRequestOne(request, response) {
-  response.end("Sup Boss?!");
+  response.end("Sup Boss?! :)");
 }
 
 function handleRequestTwo(request, response) {
