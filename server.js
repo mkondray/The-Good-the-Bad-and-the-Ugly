@@ -1,38 +1,40 @@
-const http = require("http");
+// We require/import the HTTP module
+var http = require("http");
 
-// 65535 TCP ports
-const PORT = 7000;
+// =====================================================================
 
-var server = http.createServer(function(req, res) {
-    // Process the request and respond
-    res.end("Sup Boss Man?!");
+// Then define the ports we want to listen to
+var PORTONE = 7000;
+var PORTTWO = 7500;
+
+// =====================================================================
+
+// We need two different functions to handle requests, one for each server.
+function handleRequestOne(request, response) {
+  response.end("Sup Boss?!");
+}
+
+function handleRequestTwo(request, response) {
+  response.end("Breathe... PWND!");
+}
+
+// =====================================================================
+
+// Create our servers
+var serverOne = http.createServer(handleRequestOne);
+var serverTwo = http.createServer(handleRequestTwo);
+
+// =====================================================================
+
+// Starting our servers
+serverOne.listen(PORTONE, function() {
+
+  // Callback triggered when server is successfully listening. Hurray!
+  console.log("Server listening on: http://localhost:" + PORTONE);
 });
 
-// Listen for inbound connections
-server.listen(PORT, function(err) {
-	if(err) {
-		console.error("Couldn't Listen", err);
-	} else {
-		console.log("We are now listening on port " + PORT);
-	}
+serverTwo.listen(PORTTWO, function() {
+
+  // Callback triggered when server is successfully listening. Hurray!
+  console.log("Server listening on: http://localhost:" + PORTTWO);
 });
-
-const http = require("http");
-
-// 65535 TCP ports
-const PORT = 7500;
-
-var server = http.createServer(function(req, res) {
-    // Process the request and respond
-    res.end("Breathe... PWND!");
-});
-
-// Listen for inbound connections
-server.listen(PORT, function(err) {
-	if(err) {
-		console.error("Couldn't Listen", err);
-	} else {
-		console.log("We are now listening on port " + PORT);
-	}
-});
-
